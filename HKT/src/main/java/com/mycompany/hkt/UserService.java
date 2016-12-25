@@ -11,7 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import model.Phong;
 import model.SinhVien;
+import model.ThanhVien;
 
 
 /**
@@ -70,7 +72,45 @@ public class UserService {
         }       
         return alSinhVien;
     }
-   
+   public ArrayList<Phong> getAllPhong() {
+       ArrayList<Phong> alPhong = new ArrayList<Phong>();
+       String sql = "select * from phong";
+       try {
+            ResultSet rs = statement.executeQuery(sql);
+            
+            while (rs.next()) {
+                //Lay ket qua tu rs
+                int id = rs.getInt("id_phong");
+                int socho = rs.getInt("socho");
+                Phong phong = new Phong(id, socho);
+                alPhong.add(phong);
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }       
+       return alPhong;
+       
+   }
+   public ArrayList<ThanhVien> getAllThanhVien() {
+       ArrayList<ThanhVien> alThanhVien = new ArrayList<ThanhVien>();
+       String sql = "select * from tv";
+       try {
+            ResultSet rs = statement.executeQuery(sql);
+            
+            while (rs.next()) {
+                //Lay ket qua tu rs
+                int id = rs.getInt("id_tv");
+                String ten = rs.getString("ten");
+                int team = rs.getInt("team");
+                ThanhVien tv = new ThanhVien(id,ten, team);
+                alThanhVien.add(tv);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }       
+       return alThanhVien;
+   }
     
 //    public ArrayList<User> getAllUsers() throws SQLException {
 //        System.out.println("chay vao day");
