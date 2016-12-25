@@ -15,6 +15,7 @@ public class API {
     public API( final UserService userService) {
         get("/login/:taikhoan/:matkhau", (req, res) -> toJson(userService.checkUser(req.params(":taikhoan"), req.params(":matkhau"))));
         get("/logintest/:taikhoan/:matkhau", (req, res) -> req.params(":taikhoan") + req.params(":matkhau"));
+        get("/getallsv", (req, res) -> toJson(userService.getAllSinhVien()));
         get("/home", (req, res) -> "PTIT");
         after((req, res) -> {
             res.type("application/json");

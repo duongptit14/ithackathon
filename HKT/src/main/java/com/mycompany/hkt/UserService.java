@@ -4,14 +4,15 @@
  * and open the template in the editor.
  */
 package com.mycompany.hkt;
-
+import java.util.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import model.User;
+import model.SinhVien;
+
 
 /**
  *
@@ -46,7 +47,29 @@ public class UserService {
         }       
         return false;
     }
-    
+    public ArrayList<SinhVien> getAllSinhVien() {
+        ArrayList<SinhVien> alSinhVien = new ArrayList<SinhVien>();
+        String sql = "select * from sv";
+        try {
+            ResultSet rs = statement.executeQuery(sql);
+            
+            while (rs.next()) {
+                //Lay ket qua tu rs
+                int id = rs.getInt("id_sv");
+                String ten = rs.getString("ten");
+                Date ngaysinh = rs.getDate("ngaysinh");
+                String email = rs.getString("email");
+                String gioitinh = rs.getString("gioitinh");
+                String gioithieu = rs.getString("gioithieu");
+                SinhVien sv = new SinhVien(id, ten, ngaysinh, email, gioitinh, gioithieu);
+                alSinhVien.add(sv);
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }       
+        return alSinhVien;
+    }
    
     
 //    public ArrayList<User> getAllUsers() throws SQLException {
